@@ -29,6 +29,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "1")]
         public async Task<IActionResult> Add([FromBody] JewelryRequest jewelry)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -40,11 +41,12 @@ namespace WebApplication1.Controllers
                 ProductionYear = jewelry.ProductionYear,
                 MetalWeight = jewelry.MetalWeight,
                 CreatedDate = jewelry.CreatedDate,
-                CategoryId = jewelry.CategoryId
+                CategoryId = jewelry.CategoryId,
+                Price = jewelry.Price,
             };
 
             await _repository.Add(sj);
-            return CreatedAtAction(nameof(sj), new { id = sj.SilverJewelryId }, jewelry);
+            return CreatedAtAction(nameof(Add), new { id = sj.SilverJewelryId }, jewelry);
         }
 
         [Authorize(Roles = "1")]

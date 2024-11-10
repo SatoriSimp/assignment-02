@@ -12,8 +12,8 @@ namespace WebApplication1.Request
         public string Name { get; set; }
 
         [Required]
-        [Range(0, double.MaxValue)]
-        public double Price { get; set; }
+        [Range(0.1, double.MaxValue)]
+        public decimal Price { get; set; }
 
         [Required]
         public decimal MetalWeight { get; set; }
